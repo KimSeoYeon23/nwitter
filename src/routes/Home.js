@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { dbService } from 'fbase';
-import {addDoc, collection, doc, getDocs, query} from 'firebase/firestore';
+import {addDoc, collection, getDocs, query} from 'firebase/firestore';
 
 const Home = () => {
     const [nweet, setNweet] = useState("");
@@ -14,9 +14,13 @@ const Home = () => {
 
         // 데이터 가져오기
         dbNweets.forEach((doc) => {
-            setNweets(prev => [doc.data(), ...prev]);
-            console.log(nweets);
+            const nweetObj = {
+                ...doc.data(),
+                id: doc.id,
+            }
+            setNweets(prev => [nweetObj, ...prev]);
         })
+        console.log(nweets);
     };
 
     useEffect(() => {
@@ -48,6 +52,13 @@ const Home = () => {
                 <input type='text' placeholder='What on your mind?' onChange={onChange} value={nweet} maxLength={120}/>
                 <input type='submit' value='Ntweet'/>
             </form>
+            <div>
+                {nweets.map((nweetValue) => (
+                    <div key={nweetValue.id}>
+                        <h4 className='font-bold mb-4'>{nweetValue.nweet}</h4>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
