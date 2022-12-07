@@ -1,44 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import { dbService } from 'fbase';
-import {addDoc, collection, getDocs, query} from 'firebase/firestore';
+import {addDoc, collection, getDocs, onSnapshot, orderBy, query} from 'firebase/firestore';
 
-const Home = () => {
-    const [nweet, setNweet] = useState("");
+const Home = ({userObj}) => {
+    const [nweet, setNweet] = useState('');
     const [nweets, setNweets] = useState([]);
 
     const nweetCollection = collection(dbService, "nweets");
-    
-    const getNweets = async () => {
-        const nweetRef = await query(nweetCollection);
-        let dbNweets = await getDocs(nweetRef);
 
-        // 데이터 가져오기
-        dbNweets.forEach((doc) => {
-            const nweetObj = {
-                ...doc.data(),
+    const updateNweets = async () => {
+        const updateQuery = await query(nweetCollection, orderBy("created_at", "desc"));
+        let q = await onSnapshot(updateQuery, (snapshot) => {
+            const nweetArr = snapshot.docs.map((doc) => ({
                 id: doc.id,
-            }
-            setNweets(prev => [nweetObj, ...prev]);
-        })
-        console.log(nweets);
-    };
+                ...doc.data(),
+            }));
+            setNweets(nweetArr);
+        });
+    }
 
     useEffect(() => {
-        getNweets();
+        updateNweets();
     }, []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         try{
             // 데이터 추가
-            await addDoc(collection(dbService, "nweets"), {
-                nweet,
+            await addDoc(nweetCollection, {
+                creatorId: userObj.uid,
+                text: nweet,
                 created_at: Date.now(),
             });
         }catch (e) {
             console.log(e);
         }
-        setNweet("");
+        setNweet('');
     };
 
     const onChange = (e) => {
@@ -49,13 +46,13 @@ const Home = () => {
     return (
         <div>
             <form onClick={onSubmit}>
-                <input type='text' placeholder='What on your mind?' onChange={onChange} value={nweet} maxLength={120}/>
+                <input type='text' placeholder='What on your mind?' value={nweet} onChange={onChange} maxLength={120}/>
                 <input type='submit' value='Ntweet'/>
             </form>
             <div>
-                {nweets.map((nweetValue) => (
-                    <div key={nweetValue.id}>
-                        <h4 className='font-bold mb-4'>{nweetValue.nweet}</h4>
+                {nweets.map((nweetValue, id) => (
+                    <div key={id}>
+                        <h4 className='font-bold mb-4'>{nweetValue.text}</h4>
                     </div>
                 ))}
             </div>
