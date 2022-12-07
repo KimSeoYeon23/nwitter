@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { dbService } from 'fbase';
 import {addDoc, collection, getDocs, onSnapshot, orderBy, query} from 'firebase/firestore';
+import Nweet from 'components/Nweet';
 
 const Home = ({userObj}) => {
-    const [nweet, setNweet] = useState('');
+    const [nweet, setNweet] = useState();
     const [nweets, setNweets] = useState([]);
 
     const nweetCollection = collection(dbService, "nweets");
@@ -47,13 +48,11 @@ const Home = ({userObj}) => {
         <div>
             <form onClick={onSubmit}>
                 <input type='text' placeholder='What on your mind?' value={nweet} onChange={onChange} maxLength={120}/>
-                <input type='submit' value='Ntweet'/>
+                <input type='submit' value='Nweet'/>
             </form>
             <div>
                 {nweets.map((nweetValue, id) => (
-                    <div key={id}>
-                        <h4 className='font-bold mb-4'>{nweetValue.text}</h4>
-                    </div>
+                    <Nweet nweetObj={nweetValue} key={nweetValue.id} isOwner={nweetValue.creatorId === userObj.uid}/>
                 ))}
             </div>
         </div>
