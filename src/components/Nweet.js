@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { v4 as uuidv4} from 'uuid';
+import { dbService, storageService } from "fbase";
 import { deleteDoc, updateDoc, doc } from "firebase/firestore";
-import { dbService } from "fbase";
+import { deleteObject, ref } from 'firebase/storage';
 
 const Nweet = ({nweetObj, isOwner}) => {
     const [editing, setEditing] = useState(false);
@@ -8,9 +10,18 @@ const Nweet = ({nweetObj, isOwner}) => {
 
     const onDeleteClick = async () => {
         const ok = window.confirm("Are you sure you want to delete this nweet?");
+        const nweetDoc = doc(dbService, `nweets/${nweetObj.id}`);
+        const attachmentRef = ref(storageService, nweetObj.image_url)
         if(ok) {
-            const nweetDoc = doc(dbService, `nweets/${nweetObj.id}`);
-            let deleteNweet = await deleteDoc(nweetDoc);
+            try {
+                let deleteNweet = await deleteDoc(nweetDoc);
+                if(nweetObj.image_url){
+                    const deleteAttachment = await deleteObject(attachmentRef);
+                }
+                
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 

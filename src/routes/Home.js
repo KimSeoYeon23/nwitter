@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { dbService, storageService } from 'fbase';
 import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { ref, uploadString, getDownloadURL, deleteObject } from 'firebase/storage';
+import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import Nweet from 'components/Nweet';
 
 const Home = ({userObj}) => {
@@ -34,7 +34,7 @@ const Home = ({userObj}) => {
         try{
             let imageUrl = "";
             // 데이터 추가
-            if (attachment != null) {
+            if (attachment !== null) {
                 const response = await uploadString(fileRef, attachment, "data_url");
                 imageUrl = await getDownloadURL(response.ref);
                 console.log(imageUrl);
