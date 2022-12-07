@@ -51,6 +51,7 @@ const Nweet = ({nweetObj, isOwner}) => {
                 ) : (
                     <>
                         <h4 className='font-bold'>{nweetObj.text}</h4>
+                        {nweetObj.image_url && <img src={nweetObj.image_url} width={50} height={50} /> }
                         {
                             isOwner &&
                             <>
