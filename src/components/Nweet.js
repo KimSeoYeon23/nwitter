@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { dbService } from "fbase";
 
@@ -36,7 +36,7 @@ const Nweet = ({nweetObj, isOwner}) => {
         const {target: {value}} = e;
         setNewNWeet(value);
     }
-    
+
     return (
         <div className="mb-1">
             {
