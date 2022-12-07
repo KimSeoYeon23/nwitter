@@ -34,18 +34,17 @@ const Nweet = ({nweetObj, isOwner}) => {
 
     const onChange = (e) => {
         const {target: {value}} = e;
-
         setNewNWeet(value);
     }
-
+    
     return (
         <div className="mb-1">
             {
                 editing ? (
                     <>
-                        <form onSubmit={onSubmit}>
+                        <form method="POST">
                             <input type='text' onChange={onChange} value={newNweet} placeholder='Edit your nweet' required/>
-                            <input type='submit' value="Update Nweet" />
+                            <input type='submit' onSubmit={newNweet ? onSubmit : null} value="Update Nweet" />
                         </form>
                         <button type="submit" onClick={toggleEditing}>Cancel</button>
                     </>

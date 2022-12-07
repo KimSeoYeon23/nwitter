@@ -13,10 +13,8 @@ function App() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if(user) {
-        setIsLoggedIn(true);
         setUserObj(user);
       } else {
-        setIsLoggedIn(false);
         setUserObj(null);
       }
       setInit(true);
@@ -24,14 +22,14 @@ function App() {
   }, [init]);
 
   return (
-    <>
+    <div className='container'>
       {
         init 
-        ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/>
+        ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj}/>
         : "Initializing..."
       }
       <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
-    </>
+    </div>
   );
 }
 

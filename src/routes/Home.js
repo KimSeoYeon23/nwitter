@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { dbService } from 'fbase';
 import {addDoc, collection, getDocs, onSnapshot, orderBy, query} from 'firebase/firestore';
 import Nweet from 'components/Nweet';
@@ -6,6 +6,8 @@ import Nweet from 'components/Nweet';
 const Home = ({userObj}) => {
     const [nweet, setNweet] = useState();
     const [nweets, setNweets] = useState([]);
+    const [attachment, setAttachment] = useState();
+    const fileInput = useRef();
 
     const nweetCollection = collection(dbService, "nweets");
 
@@ -44,11 +46,31 @@ const Home = ({userObj}) => {
         setNweet(value);
     }
 
+    const onFileChange = (e) => {
+        const {target: {files}} = e;
+        const url = URL.createObjectURL(files[0]);
+        console.log(url);
+        setAttachment(url);
+    }
+
+    const onClearAttachment = () => {
+        setAttachment(null);
+        fileInput.current.value = null;
+    }
+
     return (
         <div>
-            <form onClick={onSubmit}>
+            <form method='POST'>
                 <input type='text' placeholder='What on your mind?' value={nweet} onChange={onChange} maxLength={120}/>
-                <input type='submit' value='Nweet'/>
+                <input type='file' accept='image/*' onChange={onFileChange} ref={fileInput}/>
+                <input type='submit' onClick={nweet ? onSubmit : null} value='Nweet'/>
+                {
+                    attachment && 
+                    <div>
+                        <img src={attachment} width={50} height={50} alt='preview' />
+                        <button onClick={onClearAttachment}>Cancel upload</button>
+                    </div>
+                }
             </form>
             <div>
                 {nweets.map((nweetValue, id) => (
