@@ -12,8 +12,11 @@ const Profile = ({userObj, refreshUser}) => {
     const nweetCollection = collection(dbService, "nweets");
 
     const onLogOutClick = () => {
-        authService.signOut();
-        navigate('/',  { replace: true });
+        const confirm = window.confirm('로그아웃 하시겠습니까?');
+        if(confirm) {
+            authService.signOut();
+            navigate('/',  { replace: true });
+        }
     }
 
     const getMyNweets = async () => {

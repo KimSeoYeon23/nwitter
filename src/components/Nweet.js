@@ -9,7 +9,7 @@ const Nweet = ({nweetObj, isOwner}) => {
     const [newNweet, setNewNWeet] = useState(nweetObj.text);
 
     const onDeleteClick = async () => {
-        const ok = window.confirm("Are you sure you want to delete this nweet?");
+        const ok = window.confirm("Nweet을 삭제하시겠습니까?");
         const nweetDoc = doc(dbService, `nweets/${nweetObj.id}`);
         const attachmentRef = ref(storageService, nweetObj.image_url)
         if(ok) {
