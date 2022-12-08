@@ -4,7 +4,7 @@ import { authService, dbService } from 'fbase';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
-const Profile = ({userObj}) => {
+const Profile = ({userObj, refreshUser}) => {
     const [myNweets, setMyNweets] = useState();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -38,6 +38,7 @@ const Profile = ({userObj}) => {
         e.preventDefault();
         if(userObj.displayName !== newDisplayName) {
             await updateProfile(userObj, {displayName: newDisplayName});
+            refreshUser();
         }
     }
 
