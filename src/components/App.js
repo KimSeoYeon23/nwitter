@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AppRouter from 'components/Router';
 import {authService} from 'fbase';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {getAuth, onAuthStateChanged, updateProfile} from 'firebase/auth';
 
 function App() {
   console.log(authService.currentUser);
@@ -13,6 +13,7 @@ function App() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if(user) {
+        user.displayName ??= updateProfile(user, {displayName: 'user'});
         setUserObj(user);
       } else {
         setUserObj(null);
