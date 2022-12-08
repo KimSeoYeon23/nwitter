@@ -27,7 +27,7 @@ const Home = ({userObj}) => {
     return (
         <div className='w-full'>
             <NweetFactory userObj={userObj} />
-            <div>
+            <div className='flex flex-col gap-6 mt-10'>
                 {nweets.map((nweetValue, id) => (
                     <Nweet nweetObj={nweetValue} key={nweetValue.id} isOwner={nweetValue.created_id === userObj.uid}/>
                 ))}

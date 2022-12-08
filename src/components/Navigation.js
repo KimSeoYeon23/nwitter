@@ -9,7 +9,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 const Navigation = ({ userObj }) => {
 
     return (
-        <nav className='w-full'>
+        <nav className='w-full static top-0 h-20'>
             <ul className='flex flex-row justify-center gap-2'>
                 <li>
                     <Link to='/'>
@@ -17,7 +17,7 @@ const Navigation = ({ userObj }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link to='/profile' className='flex flex-col mr-20'>
+                    <Link to='/profile' className='flex flex-col mr-16'>
                         <FontAwesomeIcon className='mb-3' icon={faUser} color={'#04AAFF'} size='3x' />
                         {
                             userObj.displayName 

@@ -4,7 +4,7 @@ import { dbService, storageService } from 'fbase';
 import { addDoc, collection } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowRight, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const NweetFactory = ({userObj, }) => {
 
@@ -88,9 +88,12 @@ const NweetFactory = ({userObj, }) => {
                 </div>
                 {
                     attachment && 
-                    <div>
-                        <img src={attachment} width={50} height={50} alt='preview' />
-                        <button onClick={onClearAttachment}>Cancel upload</button>
+                    <div className='flex flex-col items-center mt-4'>
+                        <img src={attachment} className="rounded-full w-20 h-20 object-cover" alt='preview' />
+                        <button className='text-sky' onClick={onClearAttachment}>
+                            Remove
+                            <FontAwesomeIcon className='text-sky ml-3 mt-3' icon={faClose} />
+                        </button>
                     </div>
                 }
             </form>

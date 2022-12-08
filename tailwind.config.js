@@ -23,7 +23,11 @@ module.exports = {
       'bermuda': '#78dcca',
       'slate': '#0f172a',
       'sky': '#0ea5e9',
-      'red': '#f87171',
+      'red': {
+        'light' : '#f87171',
+        DEFAULT: '#ef4444',
+      },
+      'gray': '#374151',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
@@ -36,6 +40,7 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
+        'full': '9999px'
       }
     }
   },

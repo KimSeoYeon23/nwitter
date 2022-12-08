@@ -3,6 +3,8 @@ import { v4 as uuidv4} from 'uuid';
 import { dbService, storageService } from "fbase";
 import { deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from 'firebase/storage';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({nweetObj, isOwner}) => {
     const [editing, setEditing] = useState(false);
@@ -49,28 +51,39 @@ const Nweet = ({nweetObj, isOwner}) => {
     }
 
     return (
-        <div className="mb-1">
+        <div className="relative top-0 flex items-center justify-center bg-white text-black rounded-md p-5">
             {
                 editing ? (
-                    <>
+                    <div  className="w-full text-center h-40">
                         <form method="POST">
-                            <input type='text' onChange={onChange} value={newNweet} placeholder='Edit your nweet' required/>
-                            <input type='submit' onSubmit={newNweet ? onSubmit : null} value="Update Nweet" />
+                            <input className="border-black border-2 rounded-full w-full text-center py-3 px-2" type='text' onChange={onChange} value={newNweet} placeholder='Edit your nweet' required/>
                         </form>
-                        <button type="submit" onClick={toggleEditing}>Cancel</button>
-                    </>
+                        <div className="flex flex-col gap-3 mt-5 text-white">
+                            <button className="bg-sky rounded-full py-2" type='submit' onClick={onSubmit}>Update Nweet</button>
+                            <button className="bg-red rounded-full py-2" type="submit" onClick={toggleEditing}>Cancel</button>
+                        </div>
+                    </div>
                 ) : (
-                    <>
-                        <h4 className='font-bold'>{nweetObj.text}</h4>
-                        {nweetObj.image_url && <img src={nweetObj.image_url} width={50} height={50} /> }
+                    <div className="flex flex-row w-full">
+                        <div className="w-full flex">
+                            <h4 className='font-bold'>{nweetObj.text}</h4>
+                        </div>
+                        {
+                            nweetObj.image_url && 
+                            <img className="rounded-full absolute top-7 -right-6 z-10 w-14 h-14 object-cover" src={nweetObj.image_url} /> 
+                        }
                         {
                             isOwner &&
-                            <>
-                                <button className="border-solid border-2 rounded" onClick={onDeleteClick}>Delete Nweet</button>
-                                <button className="border-solid border-2 rounded" onClick={toggleEditing}>Edit Nweet</button>
-                            </>
+                            <div className="relative top-0 right-0">
+                                <button onClick={onDeleteClick}>
+                                    <FontAwesomeIcon className="text-gray absolute -top-2 right-6" icon={faTrash} />
+                                </button>
+                                <button onClick={toggleEditing}>
+                                    <FontAwesomeIcon className="text-gray absolute -top-2 right-0" icon={faPencilAlt} />
+                                </button>
+                            </div>
                         }
-                    </>
+                    </div>
                 )
             }
         </div>

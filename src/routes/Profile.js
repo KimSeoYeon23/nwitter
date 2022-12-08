@@ -42,17 +42,19 @@ const Profile = ({userObj, refreshUser}) => {
         if(userObj.displayName !== newDisplayName) {
             await updateProfile(userObj, {displayName: newDisplayName});
             refreshUser();
+            navigate('/', {replace: true});
         }
     }
 
     return (
-        <>
-            <form method='POST'>
-                <input className='border-solid border-2 rounded' type='text' placeholder='Display Name' value={newDisplayName} onChange={onChange} />
-                <input className='border-solid border-2 rounded' type='submit' value='Update Profile' onClick={onSubmit}/>
+        <div className='mt-16 w-full'>
+            <form method='POST' className='flex flex-col gap-3'>
+                <input className='border-black border-2 rounded-full w-full text-center py-2 px-2 text-black' type='text' placeholder='Display Name' value={newDisplayName} onChange={onChange} />
+                <input className='bg-sky rounded-full py-2 cursor-pointer' type='submit' value='Update Profile' onClick={onSubmit}/>
             </form>
-            <button onClick={onLogOutClick}>Log Out</button>
-        </>
+            <div className='border-solid border-2 border-gray my-8'></div>
+            <button className='bg-red w-full rounded-full py-2 mt-8' onClick={onLogOutClick}>Log Out</button>
+        </div>
     )
 };
 

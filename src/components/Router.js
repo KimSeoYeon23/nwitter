@@ -12,7 +12,12 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
 
     return (
         <Router>
-            {isLoggedIn && <Navigation userObj={userObj} />}
+            {
+                isLoggedIn && 
+                <div className="h-20">
+                    <Navigation userObj={userObj} />
+                </div>
+            }
             <Routes>
                 {
                     isLoggedIn ? (

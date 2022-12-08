@@ -47,7 +47,7 @@ const AuthForm = () => {
                 <input className='rounded-full p-2 pl-3' type="text" name="email" placeholder="Email" value={email} onChange={onChange} required/>
                 <input className='rounded-full p-2 pl-3' type="password" name="password" placeholder="Password" value={password} onChange={onChange} required />
                 <input className='bg-sky rounded-full p-3 text-white cursor-pointer' type="submit" value={newAccount ? "Create Account" : "Sign In"} />
-                <span className='text-red'>{error}</span>
+                <span className='text-red-light'>{error}</span>
             </form>
             <span className='text-center text-sky underline mt-4 mb-5 cursor-pointer' onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
         </div>
