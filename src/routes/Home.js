@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { dbService } from 'fbase';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Nweet from 'components/Nweet';
 import NweetFactory from 'components/NweetFactory';
+import { dbService } from 'fbase';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 const Home = ({userObj}) => {
     const [nweets, setNweets] = useState([]);
@@ -25,7 +25,7 @@ const Home = ({userObj}) => {
     }, []);
 
     return (
-        <div>
+        <div className='w-full'>
             <NweetFactory userObj={userObj} />
             <div>
                 {nweets.map((nweetValue, id) => (

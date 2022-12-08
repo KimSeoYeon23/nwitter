@@ -27,13 +27,12 @@ function App() {
   }
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto max-w-sm flex flex-col items-center justify-center h-full'>
       {
         init 
         ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser} />
         : "Initializing..."
       }
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
     </div>
   );
 }

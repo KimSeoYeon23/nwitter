@@ -4,8 +4,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
+      sm: '320px',
+      md: '420px',
       lg: '976px',
       xl: '1440px',
     },
@@ -22,6 +22,8 @@ module.exports = {
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
       'slate': '#0f172a',
+      'sky': '#0ea5e9',
+      'red': '#f87171',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

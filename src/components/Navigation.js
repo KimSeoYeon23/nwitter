@@ -1,17 +1,31 @@
 import React from 'react';
-import { Link, redirect } from 'react-router-dom';
 import Home from 'routes/Home';
+import { Link, redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 const Navigation = ({ userObj }) => {
 
     return (
-        <nav>
-            <ul>
+        <nav className='w-full'>
+            <ul className='flex flex-row justify-center gap-2'>
                 <li>
-                    <Link to='/'>Home</Link>
+                    <Link to='/'>
+                        <FontAwesomeIcon className='mt-2' icon={faTwitter} color={'#04AAFF'} size='3x' />
+                    </Link>
                 </li>
                 <li>
-                    <Link to='/profile'>{userObj.displayName}의 Profile</Link>
+                    <Link to='/profile' className='flex flex-col mr-20'>
+                        <FontAwesomeIcon className='mb-3' icon={faUser} color={'#04AAFF'} size='3x' />
+                        {
+                            userObj.displayName 
+                            ? `${userObj.displayName}의 Profile`
+                            : 'Profile'
+                        }
+                        
+                    </Link>
                 </li>
             </ul>
         </nav>

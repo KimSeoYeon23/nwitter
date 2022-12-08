@@ -6,7 +6,7 @@ import 'css/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div className='bg-slate text-white h-screen'>
+    <div className='bg-black text-white h-screen'>
         <App />
     </div>
 )

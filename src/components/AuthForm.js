@@ -42,15 +42,15 @@ const AuthForm = () => {
         });
     };
     return (
-        <>
-            <form onSubmit={onSubmit}>
-                <input type="text" name="email" placeholder="Email" value={email} onChange={onChange} required/>
-                <input type="password" name="password" placeholder="Password" value={password} onChange={onChange} required />
-                <input type="submit" value={newAccount ? "Create Account" : "Sign In"} />
-                {error}
+        <div className='flex flex-col w-full text-xs'>
+            <form className='flex flex-col gap-4 text-black' onSubmit={onSubmit}>
+                <input className='rounded-full p-2 pl-3' type="text" name="email" placeholder="Email" value={email} onChange={onChange} required/>
+                <input className='rounded-full p-2 pl-3' type="password" name="password" placeholder="Password" value={password} onChange={onChange} required />
+                <input className='bg-sky rounded-full p-3 text-white cursor-pointer' type="submit" value={newAccount ? "Create Account" : "Sign In"} />
+                <span className='text-red'>{error}</span>
             </form>
-            <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
-        </>
+            <span className='text-center text-sky underline mt-4 mb-5 cursor-pointer' onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
+        </div>
     )
 }
 

@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { dbService, storageService } from 'fbase';
 import { addDoc, collection } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const NweetFactory = ({userObj, }) => {
 
@@ -60,11 +62,30 @@ const NweetFactory = ({userObj, }) => {
         fileInput.current.value = null;
     }
     return (
-        <div>
+        <div className='mt-16 w-full'>
             <form method='POST'>
-                <input type='text' placeholder='What on your mind?' value={nweet} onChange={onChange} maxLength={120}/>
-                <input type='file' accept='image/*' onChange={onFileChange} ref={fileInput}/>
-                <input type='submit' onClick={onSubmit} value='Nweet'/>
+                <div className='relative bottom-0 right-0'>
+                    <input className='
+                        rounded-full 
+                        border-sky 
+                        border-2 
+                        bg-black 
+                        text-white 
+                        pl-3 
+                        pr-20
+                        py-3
+                        w-full 
+                        focus:border-white' 
+                    type='text' placeholder="What's on your mind?" value={nweet} onChange={onChange} maxLength={120}/>
+                    <button className='absolute bottom-0 right-0 top-0' type='submit' onClick={onSubmit}>
+                        <FontAwesomeIcon className='hover:text-white' icon={faCircleArrowRight} color={'#04AAFF'} size='3x' />
+                    </button>
+                </div>
+                <div className='text-center mt-5 hover:underline'>
+                    <label className='cursor-pointer text-sky' for='attachFile'>Add Photos</label>
+                    <input id='attachFile' type='file' accept='image/*' onChange={onFileChange} ref={fileInput} hidden/>
+                    <FontAwesomeIcon className='text-sky ml-3' icon={faPlus} />
+                </div>
                 {
                     attachment && 
                     <div>
