@@ -44,7 +44,7 @@ const Home = ({userObj}) => {
                 text: nweet,
                 created_at: Date.now(),
                 created_id: userObj.uid,
-                image_url: imageUrl
+                image_url: imageUrl || ''
             }
             await addDoc(nweetCollection, nweetObj);
         }catch (e) {
