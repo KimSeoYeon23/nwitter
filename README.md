@@ -66,56 +66,61 @@ REACT_APP_APP_ID = 1:589339232074:web:16bdfacc8c3c8c989663b3
 <br/>
 <br/>
 
-## Tailwind CSS config
-```javascript
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", ],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    screens: {
-      sm: '320px',
-      md: '420px',
-      lg: '976px',
-      xl: '1440px',
+## Tailwind CSS
+1. Tailwind css version
+   ```json
+   "tailwindcss": "^3.2.4"
+   ```
+2. config
+    ```javascript
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+    content: ["./src/**/*.{js,jsx,ts,tsx}", ],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+        screens: {
+        sm: '320px',
+        md: '420px',
+        lg: '976px',
+        xl: '1440px',
+        },
+        colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        'black': '#000',
+        'white': '#ffffff',
+        'purple': '#3f3cbb',
+        'midnight': '#121063',
+        'metal': '#565584',
+        'tahiti': '#3ab7bf',
+        'silver': '#ecebff',
+        'bubble-gum': '#ff77e9',
+        'bermuda': '#78dcca',
+        'slate': '#0f172a',
+        'sky': '#0ea5e9',
+        'red': {
+            'light' : '#f87171',
+            DEFAULT: '#ef4444',
+        },
+        'gray': '#374151',
+        },
+        fontFamily: {
+        sans: ['Graphik', 'sans-serif'],
+        serif: ['Merriweather', 'serif'],
+        },
+        extend: {
+        spacing: {
+            '128': '32rem',
+            '144': '36rem',
+        },
+        borderRadius: {
+            '4xl': '2rem',
+            'full': '9999px'
+        }
+        }
     },
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      'black': '#000',
-      'white': '#ffffff',
-      'purple': '#3f3cbb',
-      'midnight': '#121063',
-      'metal': '#565584',
-      'tahiti': '#3ab7bf',
-      'silver': '#ecebff',
-      'bubble-gum': '#ff77e9',
-      'bermuda': '#78dcca',
-      'slate': '#0f172a',
-      'sky': '#0ea5e9',
-      'red': {
-        'light' : '#f87171',
-        DEFAULT: '#ef4444',
-      },
-      'gray': '#374151',
-    },
-    fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-    },
-    extend: {
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        '4xl': '2rem',
-        'full': '9999px'
-      }
+    variants: {},
+    plugins: [],
     }
-  },
-  variants: {},
-  plugins: [],
-}
 
-```
+    ```
