@@ -12,6 +12,23 @@ Twitter (mini)clone with React and Firebase
 <br/>
 <br/>
 
+## 📕 Version
+1. Firebase version
+   ```json
+    "firebase": "^9.6.1",
+   ```
+2. React version
+    ```json
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
+    "react-scripts": "5.0.1",
+    ```
+
+
+<br/>
+<br/>
+
 ## Firebase config
 ```javascript
 import { initializeApp } from 'firebase/app';
@@ -36,6 +53,15 @@ const app = initializeApp(firebaseConfig);
 export const authService = getAuth();
 export const dbService = getFirestore();
 export const storageService = getStorage();
+```
+### env setting
+```ini
+REACT_APP_API_KEY = AIzaSyA9Q93o05NRY67VAA3PS7nQrPBY2QwhVY0
+REACT_APP_AUTH_DOMAIN = nwitter-2105b.firebaseapp.com
+REACT_APP_PROJECT_ID = nwitter-2105b
+REACT_APP_STORAGE_BUCKET = nwitter-2105b.appspot.com
+REACT_APP_MESSAGING_SENDER_ID = 589339232074
+REACT_APP_APP_ID = 1:589339232074:web:16bdfacc8c3c8c989663b3
 ```
 <br/>
 <br/>
